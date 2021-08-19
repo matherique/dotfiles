@@ -49,13 +49,13 @@ set undodir=~/.config/nvim/undodir
 set undofile
 set incsearch
 set nohlsearch
-"set termguicolors 
+set termguicolors 
 set scrolloff=10
 let g:go_fmt_command = "goimports"
 set spelllang=pt_br
 "set viminfo='20,<1000,s1000'
 
-set updatetime=10
+set updatetime=100
 
 highlight CursorLine term=bold cterm=bold guibg=Grey40
 
@@ -101,6 +101,7 @@ filetype indent on
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
