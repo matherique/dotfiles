@@ -19,7 +19,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " syntax more languages
 Plug 'sheerun/vim-polyglot'                             " varias syntex de varias linguagens  
 " go suport 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " pt-br check
 Plug 'mateusbraga/vim-spell-pt-br'
 Plug 'OmniSharp/omnisharp-vim'
