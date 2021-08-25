@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 " statusline
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 " syntax de javascript
 Plug 'pangloss/vim-javascript'                          " syntax highlight de js
 " files tree view
