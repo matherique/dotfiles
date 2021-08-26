@@ -2,31 +2,19 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'gruvbox-community/gruvbox'
 " statusline
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-" syntax de javascript
-Plug 'pangloss/vim-javascript'                          " syntax highlight de js
 " files tree view
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " sistema de arquivos
-" commentador
-Plug 'scrooloose/nerdcommenter'                         " comentarios
 " fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" typescript syntax
-Plug 'leafgarland/typescript-vim'
-" autocompleter + lsp
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} 
-" syntax more languages
-Plug 'sheerun/vim-polyglot'                             " varias syntex de varias linguagens  
 " go suport 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " pt-br check
 Plug 'mateusbraga/vim-spell-pt-br'
-
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'tpope/vim-fugitive'
-
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 call plug#end()
 
 if exists('+termguicolors')
@@ -60,6 +48,10 @@ set spelllang=pt_br
 
 set updatetime=100
 
+noremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
 highlight CursorLine term=bold cterm=bold guibg=Grey40
 
 " Workaround for creating transparent bg
@@ -78,34 +70,32 @@ let g:go_highlight_types = 0
 set completeopt=noinsert,menuone,noselect
 set rtp+=~/.fzf
 
-" comentar
-nnoremap <C-Left>/ :call NERDComment(0,"toggle")<CR>
-vnoremap <C-Left>/ :call NERDComment(0,"toggle")<CR>
-
 " search by files arquivos
-nnoremap <c-p> :GFiles<CR> 
- 
+nnoremap <c-p> :Files<CR> 
+
 autocmd BufEnter *.tsx set filetype=typescriptreact
 autocmd BufEnter *.jsx set filetype=javascriptreact
 
 lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    additional_vim_regex_highlighting = false,
+  },
+}
 
-local function on_attach()
+local on_attach = function(client, bufnr)
 end
 
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
+
+require'lspconfig'.java_language_server.setup{ on_attach=on_attach }
+
 require'lspconfig'.clangd.setup {
     on_attach = on_attach,
     root_dir = function() return vim.loop.cwd() end
 }
-
-require'lspconfig'.jedi_language_server.setup{
-    on_attach=on_attach,
-}
-
-require'lspconfig'.svelte.setup{}
-
-require'lspconfig'.yamlls.setup{}
 
 require'lspconfig'.gopls.setup{
     on_attach=on_attach,
@@ -122,6 +112,16 @@ require'lspconfig'.gopls.setup{
 
 EOF
 
+nnoremap gd :lua vim.lsp.buf.definition()<CR>
+nnoremap gi :lua vim.lsp.buf.implementation()<CR>
+nnoremap gsh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap gr :lua vim.lsp.buf.references()<CR>
+nnoremap grn :lua vim.lsp.buf.rename()<CR>
+nnoremap K :lua vim.lsp.buf.hover()<CR>
+nnoremap gca :lua vim.lsp.buf.code_action()<CR>
+nnoremap gn :lua vim.lsp.diagnostic.goto_next()<CR>
+
+
 " Do this in lua?? maybe...
 " vim.o is short for something teej thinks makes sense.
 set completeopt=menuone,noselect
@@ -133,17 +133,6 @@ endfun
 
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>gi :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>gsh :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>grr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>grn :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>gh :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>gca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>gsd :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-nnoremap <leader>gn :lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <leader>gll :call LspLocationList()<CR>
 
 augroup THE_PRIMEAGEN_LSP
     autocmd!
@@ -174,6 +163,5 @@ let g:compe.source.vsnip = v:true
 
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
-
 set background=dark
-let g:gruvbox_contrast="hard"
+let g:gruvbox_contrast_dark="hard"
