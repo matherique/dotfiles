@@ -2,19 +2,23 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'gruvbox-community/gruvbox'
 " statusline
 Plug 'vim-airline/vim-airline'
-" files tree view
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " sistema de arquivos
 " fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " go suport 
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " pt-br check
 Plug 'mateusbraga/vim-spell-pt-br'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-lua/plenary.nvim'
+"Plug 'nvim-telescope/telescope.nvim'
+Plug 'bluz71/vim-moonfly-colors'
+
+Plug 'xuhdev/vim-latex-live-preview'
+
 call plug#end()
 
 if exists('+termguicolors')
@@ -23,7 +27,7 @@ if exists('+termguicolors')
 endif
  
 syntax on
-colorscheme gruvbox
+colorscheme moonfly
 set t_Co=256
 set tabstop=2 softtabstop=2
 set shiftwidth=2
@@ -42,9 +46,7 @@ set incsearch
 set nohlsearch
 set termguicolors 
 set scrolloff=10
-let g:go_fmt_command = "goimports"
 set spelllang=pt_br
-"set viminfo='20,<1000,s1000'
 
 set updatetime=100
 
@@ -52,7 +54,7 @@ noremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 
-highlight CursorLine term=bold cterm=bold guibg=Grey40
+highlight CursorLine term=bold cterm=bold guibg=Grey43
 
 " Workaround for creating transparent bg
 autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
@@ -64,14 +66,17 @@ let mapleader = " "
 nnoremap <silent> <Leader>r :so ~/.config/nvim/init.vim<CR>
 
 
-let g:go_highlight_types = 0
+
+" let g:go_highlight_types = 0
+" let g:go_fmt_command = "goimports"
 
 "plugins
 set completeopt=noinsert,menuone,noselect
-set rtp+=~/.fzf
+" set rtp+=~/.fzf
 
 " search by files arquivos
-nnoremap <c-p> :Files<CR> 
+" nnoremap <c-p> :Telescope git_files layout_strategy=vertical<CR> 
+nnoremap <c-p> :Files <CR> 
 
 autocmd BufEnter *.tsx set filetype=typescriptreact
 autocmd BufEnter *.jsx set filetype=javascriptreact
@@ -88,6 +93,8 @@ require'nvim-treesitter.configs'.setup {
 local on_attach = function(client, bufnr)
 end
 
+
+require'lspconfig'.texlab.setup{ on_attach=on_attach }
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 
 require'lspconfig'.java_language_server.setup{ on_attach=on_attach }
