@@ -70,7 +70,7 @@ export PS1U=$PS1P
 if [[ $EUID == 0 ]]; then
   export PS1='\[${PS1P}\]\u\[${PS1c}\]@\[${PS1h}\]\h\[${PS1c}\]:\[${PS1w}\]\W$(__git_ps1 "\[${PS1c}\](\[${gruv_purple}\]%s\[${PS1c}\])")\[$PS1P\]#\[\033[00m\] '
 else
-  export PS1='\[${PS1u}\]\u\[${PS1c}\]@\[${PS1h}\]\h\[${PS1c}\]:\[${PS1w}\]\W$(__git_ps1 "\[${PS1c}\](\[${gruv_purple}\]%s\[${PS1c}\])")\[$PS1p\]$\[\033[00m\] '
+  export PS1='\[${PS1u}\]\u\[${PS1c}\]@\[${PS1h}\]\h\[${PS1c}\]:\[${PS1w}\]\W$(__git_ps1 "\[${PS1c}\](\[${gruv_purple}\]%s\[${PS1c}\])")\[$PS1p\]❱\[\033[00m\] '
 fi
 
 # enable color support of ls and also add handy aliases

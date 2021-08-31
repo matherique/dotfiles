@@ -6,19 +6,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " go suport 
-"Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " pt-br check
 Plug 'mateusbraga/vim-spell-pt-br'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 Plug 'bluz71/vim-moonfly-colors'
-
+Plug 'mfussenegger/nvim-jdtls'
 Plug 'xuhdev/vim-latex-live-preview'
-
 call plug#end()
 
 if exists('+termguicolors')
@@ -28,6 +27,7 @@ endif
  
 syntax on
 colorscheme moonfly
+set background=dark
 set t_Co=256
 set tabstop=2 softtabstop=2
 set shiftwidth=2
@@ -53,7 +53,6 @@ set updatetime=100
 noremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-
 highlight CursorLine term=bold cterm=bold guibg=Grey43
 
 " Workaround for creating transparent bg
@@ -65,12 +64,12 @@ let mapleader = " "
 
 nnoremap <silent> <Leader>r :so ~/.config/nvim/init.vim<CR>
 
-
+let g:gruvbox_contrast_dark="hard"
 
 " let g:go_highlight_types = 0
 " let g:go_fmt_command = "goimports"
 
-"plugins
+" plugins
 set completeopt=noinsert,menuone,noselect
 " set rtp+=~/.fzf
 
@@ -93,12 +92,11 @@ require'nvim-treesitter.configs'.setup {
 local on_attach = function(client, bufnr)
 end
 
-
 require'lspconfig'.texlab.setup{ on_attach=on_attach }
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
+require'lspconfig'.jdtls.setup({cmd = {'javalsp'}})
 
-require'lspconfig'.java_language_server.setup{ on_attach=on_attach }
-
+--[[
 require'lspconfig'.clangd.setup {
     on_attach = on_attach,
     root_dir = function() return vim.loop.cwd() end
@@ -117,6 +115,7 @@ require'lspconfig'.gopls.setup{
     },
 }
 
+--]]
 EOF
 
 nnoremap gd :lua vim.lsp.buf.definition()<CR>
@@ -127,7 +126,6 @@ nnoremap grn :lua vim.lsp.buf.rename()<CR>
 nnoremap K :lua vim.lsp.buf.hover()<CR>
 nnoremap gca :lua vim.lsp.buf.code_action()<CR>
 nnoremap gn :lua vim.lsp.diagnostic.goto_next()<CR>
-
 
 " Do this in lua?? maybe...
 " vim.o is short for something teej thinks makes sense.
@@ -169,6 +167,3 @@ let g:compe.source.nvim_lua = v:true
 let g:compe.source.vsnip = v:true
 
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-
-set background=dark
-let g:gruvbox_contrast_dark="hard"
