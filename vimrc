@@ -21,7 +21,6 @@ Plug 'sheerun/vim-polyglot'                             " varias syntex de varia
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " pt-br check
 Plug 'mateusbraga/vim-spell-pt-br'
-Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
 
 if exists('+termguicolors')
@@ -30,7 +29,7 @@ if exists('+termguicolors')
 endif
  
 syntax on
-colorscheme gruvbox
+colorscheme default
 set background=dark
 set t_Co=256
 set tabstop=2 softtabstop=2
