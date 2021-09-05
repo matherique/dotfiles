@@ -18,7 +18,16 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'mfussenegger/nvim-jdtls'
 Plug 'xuhdev/vim-latex-live-preview'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'rwxrob/vim-pandoc-syntax-simple' 
+Plug 'pantharshit00/vim-prisma'
+Plug 'ray-x/lsp_signature.nvim'
 call plug#end()
+
+let g:pandoc#formatting#mode = 'h' " A'
+let g:pandoc#formatting#textwidth = 72
+let g:pandoc#folding#fdc= 0
+let g:pandoc#modules#disabled = ["folding"]
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -52,12 +61,12 @@ set updatetime=100
 noremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-highlight CursorLine term=bold cterm=bold guibg=Grey43
+" highlight CursorLine term=bold cterm=bold guibg=Grey43
 
 " Workaround for creating transparent bg
 autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
-            \ |    highlight LineNr     ctermbg=NONE guibg=NONE
-            \ |    highlight SignColumn ctermbg=NONE guibg=NONE
+           \ |    highlight LineNr     ctermbg=NONE guibg=NONE
+           \ |    highlight SignColumn ctermbg=NONE guibg=NONE
 
 let mapleader = " "
 
@@ -94,10 +103,12 @@ end
 require'lspconfig'.texlab.setup{ on_attach=on_attach }
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 require'lspconfig'.jdtls.setup({cmd = {'javalsp'}})
+require "lsp_signature".setup({ max_width = 80 })
+
 
 --[[
 require'lspconfig'.clangd.setup {
-    on_attach = on_attach,
+  on_attach = on_attach,
     root_dir = function() return vim.loop.cwd() end
 }
 
@@ -166,3 +177,4 @@ let g:compe.source.nvim_lua = v:true
 let g:compe.source.vsnip = v:true
 
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><C-Space> <CR> compe#complete('<CR')
