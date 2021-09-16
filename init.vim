@@ -21,18 +21,13 @@ Plug 'xuhdev/vim-latex-live-preview'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'rwxrob/vim-pandoc-syntax-simple' 
 Plug 'pantharshit00/vim-prisma'
-Plug 'ray-x/lsp_signature.nvim'
+" Plug 'ray-x/lsp_signature.nvim'
 call plug#end()
 
 let g:pandoc#formatting#mode = 'h' " A'
 let g:pandoc#formatting#textwidth = 72
 let g:pandoc#folding#fdc= 0
 let g:pandoc#modules#disabled = ["folding"]
-
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
  
 syntax on
 colorscheme moonfly
@@ -52,21 +47,21 @@ set noswapfile
 set undofile
 set incsearch
 set nohlsearch
-set termguicolors 
+set termguicolors
 set scrolloff=10
-set spelllang=pt_br
+"set spelllang=pt_br
 
 set updatetime=100
 
 noremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" highlight CursorLine term=bold cterm=bold guibg=Grey43
+highlight CursorLine term=bold cterm=bold guibg=Grey43
 
 " Workaround for creating transparent bg
 autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
-           \ |    highlight LineNr     ctermbg=NONE guibg=NONE
-           \ |    highlight SignColumn ctermbg=NONE guibg=NONE
+\ |    highlight LineNr     ctermbg=NONE guibg=NONE
+\ |    highlight SignColumn ctermbg=NONE guibg=NONE
 
 let mapleader = " "
 
@@ -74,8 +69,8 @@ nnoremap <silent> <Leader>r :so ~/.config/nvim/init.vim<CR>
 
 let g:gruvbox_contrast_dark="hard"
 
-" let g:go_highlight_types = 0
-" let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 0
+let g:go_fmt_command = "goimports"
 
 " plugins
 set completeopt=noinsert,menuone,noselect
@@ -103,15 +98,6 @@ end
 require'lspconfig'.texlab.setup{ on_attach=on_attach }
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 require'lspconfig'.jdtls.setup({cmd = {'javalsp'}})
-require "lsp_signature".setup({ max_width = 80 })
-
-
---[[
-require'lspconfig'.clangd.setup {
-  on_attach = on_attach,
-    root_dir = function() return vim.loop.cwd() end
-}
-
 require'lspconfig'.gopls.setup{
     on_attach=on_attach,
     cmd = {"gopls", "serve"},
@@ -123,6 +109,15 @@ require'lspconfig'.gopls.setup{
             staticcheck = true,
         },
     },
+}
+
+
+--[[
+require "lsp_signature".setup({ max_width = 80 })
+
+require'lspconfig'.clangd.setup {
+  on_attach = on_attach,
+    root_dir = function() return vim.loop.cwd() end
 }
 
 --]]
