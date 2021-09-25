@@ -49,7 +49,7 @@ set incsearch
 set nohlsearch
 set termguicolors
 set scrolloff=10
-"set spelllang=pt_br
+set spelllang=en
 
 set updatetime=100
 
@@ -98,6 +98,28 @@ end
 require'lspconfig'.texlab.setup{ on_attach=on_attach }
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 require'lspconfig'.jdtls.setup({cmd = {'javalsp'}})
+require "lsp_signature".setup({ max_width = 80 })
+require'lspconfig'.gopls.setup{
+    on_attach=on_attach,
+    cmd = {"gopls"},
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    },
+}
+
+
+
+--[[
+require'lspconfig'.clangd.setup {
+  on_attach = on_attach,
+    root_dir = function() return vim.loop.cwd() end
+}
+
 require'lspconfig'.gopls.setup{
     on_attach=on_attach,
     cmd = {"gopls", "serve"},
