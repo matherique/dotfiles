@@ -8,6 +8,7 @@
   protocol = ssh 
 
 [alias]
+  parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
   st = status -sb
   sf = show --name-only
   lg = log --oneline --graph --decorate
@@ -18,3 +19,5 @@
   rollback = reset --soft HEAD~1
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main

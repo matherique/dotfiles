@@ -98,7 +98,6 @@ end
 require'lspconfig'.texlab.setup{ on_attach=on_attach }
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 require'lspconfig'.jdtls.setup({cmd = {'javalsp'}})
-require "lsp_signature".setup({ max_width = 80 })
 require'lspconfig'.gopls.setup{
     on_attach=on_attach,
     cmd = {"gopls"},
@@ -111,7 +110,6 @@ require'lspconfig'.gopls.setup{
         },
     },
 }
-
 
 
 --[[
