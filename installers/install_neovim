@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+if ! [ -x "$(command -v nvim)" ]; then
+
+  cd $(mktemp -d)
+  echo $(pwd)
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+  chmod u+x nvim.appimage
+
+else
+  echo 'nvim already installed'
+fi
+
+

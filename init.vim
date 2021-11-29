@@ -30,7 +30,6 @@ let g:pandoc#folding#fdc= 0
 let g:pandoc#modules#disabled = ["folding"]
  
 syntax on
-colorscheme moonfly
 set background=dark
 set t_Co=256
 set tabstop=2 softtabstop=2
@@ -57,6 +56,8 @@ noremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 highlight CursorLine term=bold cterm=bold guibg=Grey43
+highlight Pmenu ctermbg=gray guibg=gray
+
 
 " Workaround for creating transparent bg
 autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
@@ -93,6 +94,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 local on_attach = function(client, bufnr)
+  vim.api.nvim_command("au BufWritePost <buffer> lua vim.lsp.buf.formatting()")
 end
 
 require'lspconfig'.texlab.setup{ on_attach=on_attach }

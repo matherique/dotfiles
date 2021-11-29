@@ -5,7 +5,7 @@ if ! [ -x "$(command -v mvn)" ]; then
 
   cd $(mktemp -d)
   echo $(pwd)
-  wget https://downloads.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz -P $(pwd)
+  wget https://downloads.apache.org/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz -P $(pwd)
   echo "Coping"
   tar xf apache-maven-*.tar.gz -C .
   rm apache-maven-*.tar.gz
@@ -15,7 +15,7 @@ if ! [ -x "$(command -v mvn)" ]; then
   rm -rf maven
 
 else
-  echo 'maven already installed'
+  echo 'nvim already installed'
 fi
 
 
