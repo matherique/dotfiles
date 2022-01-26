@@ -6,7 +6,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " go suport 
-" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " pt-br check
 Plug 'mateusbraga/vim-spell-pt-br'
 Plug 'neovim/nvim-lspconfig'
@@ -17,7 +17,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 " Plug 'nvim-telescope/telescope.nvim'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'mfussenegger/nvim-jdtls'
-Plug 'xuhdev/vim-latex-live-preview'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'rwxrob/vim-pandoc-syntax-simple' 
 Plug 'pantharshit00/vim-prisma'
@@ -30,6 +29,7 @@ let g:pandoc#folding#fdc= 0
 let g:pandoc#modules#disabled = ["folding"]
  
 syntax on
+colorscheme gruvbox
 set background=dark
 set t_Co=256
 set tabstop=2 softtabstop=2

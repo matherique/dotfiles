@@ -128,5 +128,7 @@ export NVM_DIR="$HOME/.nvm"
 
 type gh &>/dev/null && . <(gh completion -s bash)
 type npm &>/dev/null && . <(npm completion)
+type kubectl &>/dev/null && . <(kubectl completion bash)
+type minikube &>/dev/null && . <(minikube completion bash)
 
 
