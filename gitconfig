@@ -1,11 +1,13 @@
 [core]
   editor=vim
+
 [user]
   email = matherique@gmail.com
   name = Matheus Henrique
-[hub]
-  username = matherique
-  protocol = ssh 
+	signingkey = FDAC859964C62522
+
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.gitconfig
 
 [alias]
   parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
@@ -21,3 +23,9 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[url "git@github.com-work:"]
+	insteadOf = https://github.com/
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[commit]
+	gpgSign = true

@@ -19,7 +19,7 @@ if exists('+termguicolors')
 endif
  
 syntax on
-set background=dark
+colorscheme default
 set t_Co=256
 set tabstop=2 softtabstop=2
 set shiftwidth=2
