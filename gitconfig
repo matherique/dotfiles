@@ -4,7 +4,6 @@
 [user]
   email = matherique@gmail.com
   name = Matheus Henrique
-	signingkey = FDAC859964C62522
 
 [includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig
