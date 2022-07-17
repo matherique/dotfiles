@@ -7,6 +7,10 @@ ln -sf "$PWD/bash_profile" "$HOME/.bash_profile"
 ln -sf "$PWD/profile" "$HOME/.profile"
 ln -sf "$PWD/tmux.conf" "$HOME/.tmux.conf"
 
+mkdir -p "$HOME/.config/alacritty" 
+mkdir -p "$HOME/.config/nvim" 
+mkdir -p "$HOME/.config/gh" 
+
 if [ ! -d "$HOME/.config/alacritty" ]; then mkdir $HOME/.config/alacritty; fi
 ln -sf "$PWD/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
 
@@ -18,8 +22,8 @@ ln -sf "$PWD/.git-prompt.sh" "$HOME/.git-prompt.sh"
 if [ ! -d "$HOME/.config/gh" ]; then mkdir $HOME/.config/gh; fi
 ln -sf "$PWD/gh/config.yml" "$HOME/.config/gh/config.yml"
 
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

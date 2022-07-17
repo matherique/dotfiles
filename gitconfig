@@ -8,6 +8,9 @@
 [includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig
 
+[includeIf "gitdir:~/personal/"]
+  path = ~/personal/.gitconfig
+
 [alias]
   parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
   st = status -sb
@@ -18,13 +21,18 @@
   unstage = reset HEAD --
   undo = checkout --
   rollback = reset --soft HEAD~1
+
 [pull]
 	rebase = false
+
 [init]
 	defaultBranch = main
+
 [url "git@github.com-work:"]
 	insteadOf = https://github.com/
+
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
 [commit]
 	gpgSign = true
