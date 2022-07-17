@@ -2,6 +2,7 @@
 
 ln -sf "$PWD/vimrc" "$HOME/.vimrc"
 ln -sf "$PWD/gitconfig" "$HOME/.gitconfig"
+ln -sf "$PWD/.personal/gitconfig-personal" "$HOME/personal/.gitconfig"
 ln -sf "$PWD/bashrc" "$HOME/.bashrc"
 ln -sf "$PWD/bash_profile" "$HOME/.bash_profile"
 ln -sf "$PWD/profile" "$HOME/.profile"
