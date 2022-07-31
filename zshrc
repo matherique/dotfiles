@@ -113,7 +113,8 @@ type npm &>/dev/null && . <(npm completion)
 type kubectl &>/dev/null && . <(kubectl completion bash)
 type minikube &>/dev/null && . <(minikube completion bash)
 
-
-
-
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
+export GOPATH="$HOME/go"
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
 
