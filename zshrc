@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="af-magic"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -109,3 +109,5 @@ export GPG_TTY=$(tty)
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 type npm &>/dev/null && . <(npm completion)
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+source ~/.bash_profile

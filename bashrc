@@ -132,3 +132,4 @@ type kubectl &>/dev/null && . <(kubectl completion bash)
 type minikube &>/dev/null && . <(minikube completion bash)
 
 
+. "$HOME/.cargo/env"

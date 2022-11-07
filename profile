@@ -31,3 +31,4 @@ export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
 # this make ctrl+tab works in terminal
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+. "$HOME/.cargo/env"
