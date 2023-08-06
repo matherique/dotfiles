@@ -69,6 +69,9 @@ require('lazy').setup({
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
+    'jose-elias-alvarez/null-ls.nvim',
+  },
+  {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -200,6 +203,42 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
 }, {})
 
+
+local null_ls = require("null-ls")
+
+local augroupformat = vim.api.nvim_create_augroup("LspFormatting", {})
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.gofmt,
+    null_ls.builtins.formatting.goimports,
+    null_ls.builtins.formatting.rustfmt,
+    null_ls.builtins.code_actions.eslint
+  },
+
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then 
+      vim.api.nvim_clear_autocmds({
+        group = augroupformat,
+        buffer = bufnr,
+      })
+
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        group = augroupformat,
+        buffer = bufnr,
+        callback = function() 
+          vim.lsp.buf.format({ bufnr = bufnr })
+        end,
+      })
+    end
+
+  end
+
+})
+
+--
+--
+--
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -451,7 +490,7 @@ local servers = {
   golangci_lint_ls = {
     settings = {
       gopls = {
-          gofumpt = true,
+        gofumpt = true,
       }
     },
   },
