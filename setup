@@ -17,7 +17,7 @@ if [ ! -d "$HOME/.config/alacritty" ]; then mkdir $HOME/.config/alacritty; fi
 ln -sf "$PWD/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
 
 if [ ! -d "$HOME/.config/nvim" ]; then mkdir $HOME/.config/nvim; fi
-ln -sf "$PWD/init.vim" "$HOME/.config/nvim/init.vim"
+ln -sf "$PWD/init.lua" "$HOME/.config/nvim/init.lua"
 
 ln -sf "$PWD/.git-prompt.sh" "$HOME/.git-prompt.sh"
 
