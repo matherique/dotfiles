@@ -127,12 +127,21 @@ require('lazy').setup({
     },
   },
 
+  -- {
+  --   -- Theme inspired by Atom
+  --   'rose-pine/neovim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'rose-pine'
+  --   end,
+  -- },
+
   {
-    -- Theme inspired by Atom
-    'rose-pine/neovim',
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'rose-pine'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
 
@@ -227,7 +236,7 @@ null_ls.setup({
         group = augroupformat,
         buffer = bufnr,
         callback = function() 
-          vim.lsp.buf.format({ bufnr = bufnr })
+          vim.lsp.buf.format({ async = false, bufnr = bufnr })
         end,
       })
     end
@@ -250,21 +259,24 @@ vim.o.hlsearch = false
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 vim.o.expandtab = true
-
+vim.o.wrap = false
 vim.o.swapfile = false
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
 vim.o.background = 'dark'
-
+vim.o.scrolloff = 20
+--
+--
+--
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
---  vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -277,12 +289,12 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
--- vim.wo.signcolumn = 'yes'
-vim.o.noswapfile = true
+vim.wo.signcolumn = 'yes'
+vim.o.swapfile = false
 
 -- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeout = true
+vim.o.updatetime = 50
+-- vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
@@ -304,6 +316,7 @@ vim.keymap.set("n", "Y", "yy")
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -487,14 +500,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
-  golangci_lint_ls = {
-    settings = {
-      gopls = {
-        gofumpt = true,
-      }
-    },
-  },
-
   gopls = {
     cmd = { "gopls", "serve" },
     filetypes = { "go", "gomod" },
