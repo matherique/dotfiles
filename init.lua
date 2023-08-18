@@ -118,6 +118,13 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      current_line_blame = true,  -- Toggle with `:Gitsigns toggle_current_line_blame`
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+        ignore_whitespace = false,
+      },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
           { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
@@ -137,14 +144,27 @@ require('lazy').setup({
   -- },
 
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    -- Theme inspired by Atom
+    'ellisonleao/gruvbox.nvim',
     priority = 1000,
+    opts = {
+    },
     config = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      vim.cmd.colorscheme 'gruvbox'
     end,
   },
 
+
+
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'catppuccin-mocha'
+  --   end,
+  -- },
+  --
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -153,7 +173,7 @@ require('lazy').setup({
       options = {
         path = 3,
         icons_enabled = false,
-        theme = 'horizon',
+        theme = 'gruvbox',
         component_separators = '|',
         section_separators = '',
       },
@@ -222,11 +242,11 @@ null_ls.setup({
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.formatting.rustfmt,
-    null_ls.builtins.code_actions.eslint
+    null_ls.builtins.formatting.eslint
   },
 
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then 
+    if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({
         group = augroupformat,
         buffer = bufnr,
@@ -235,12 +255,11 @@ null_ls.setup({
       vim.api.nvim_create_autocmd("BufWritePost", {
         group = augroupformat,
         buffer = bufnr,
-        callback = function() 
-          vim.lsp.buf.format({ async = false, bufnr = bufnr })
+        callback = function()
+          vim.lsp.buf.format({ async = false, bufnr = bufnr, timeout = 2000})
         end,
       })
     end
-
   end
 
 })
@@ -278,6 +297,8 @@ vim.o.scrolloff = 20
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
+vim.o.laststatus=3
+
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -303,10 +324,15 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
---
--- [[ Basic Keymaps ]]
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" , fg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" , fg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none"})
+vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none"})
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", fg = "none"})
+vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = "none"})
+vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "none"})
+vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "none"})
+vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none", fg = "none"})
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
