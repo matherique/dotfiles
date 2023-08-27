@@ -118,7 +118,7 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
-      current_line_blame = true,  -- Toggle with `:Gitsigns toggle_current_line_blame`
+      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
       current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
@@ -239,10 +239,9 @@ local augroupformat = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
   sources = {
-    null_ls.builtins.formatting.gofmt,
-    null_ls.builtins.formatting.goimports,
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.goimports_reviser,
     null_ls.builtins.formatting.rustfmt,
-    null_ls.builtins.formatting.eslint
   },
 
   on_attach = function(client, bufnr)
@@ -256,7 +255,7 @@ null_ls.setup({
         group = augroupformat,
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format({ async = false, bufnr = bufnr, timeout = 2000})
+          vim.lsp.buf.format({ async = false, bufnr = bufnr, timeout = 2000 })
         end,
       })
     end
@@ -297,7 +296,7 @@ vim.o.scrolloff = 20
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
-vim.o.laststatus=3
+vim.o.laststatus = 3
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -324,15 +323,15 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" , fg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" , fg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none"})
-vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none"})
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", fg = "none"})
-vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = "none"})
-vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "none"})
-vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "none"})
-vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none", fg = "none"})
+vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none", fg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none" })
+-- vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none", fg = "none" })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -532,11 +531,46 @@ local servers = {
     settings = {
       gopls = {
         gofumpt = true,
-        analyses = {
-          unusedparams = true,
+        codelenses = {
+          gc_details = false,
+          generate = true,
+          regenerate_cgo = true,
+          run_govulncheck = true,
+          test = true,
+          tidy = true,
+          upgrade_dependency = true,
+          vendor = true,
         },
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
+        analyses = {
+          fieldalignment = true,
+          nilness = true,
+          unusedparams = true,
+          unusedwrite = true,
+          useany = true,
+        },
+        usePlaceholders = true,
+        completeUnimported = true,
         staticcheck = true,
+        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+        semanticTokens = true,
       },
+
+      -- gopls = {
+      --   gofumpt = true,
+      --   analyses = {
+      --     unusedparams = true,
+      --   },
+      --   staticcheck = true,
+      -- },
     },
   },
   -- pyright = {},
