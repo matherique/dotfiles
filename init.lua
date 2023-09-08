@@ -63,6 +63,10 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
+  -- Git related plugins
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'github/copilot.vim',
@@ -240,7 +244,7 @@ local augroupformat = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.gofumpt,
-    null_ls.builtins.formatting.goimports_reviser,
+    -- null_ls.builtins.formatting.goimports_reviser,
     null_ls.builtins.formatting.rustfmt,
   },
 
@@ -317,6 +321,8 @@ vim.o.updatetime = 50
 -- vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+vim.o.colorcolumn = '80'
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
@@ -388,6 +394,7 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
