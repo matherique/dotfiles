@@ -69,12 +69,8 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-  'github/copilot.vim',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-  },
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -138,25 +134,40 @@ require('lazy').setup({
     },
   },
 
+  {
+    -- Theme inspired by Atom
+    'rose-pine/neovim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'rose-pine'
+    end,
+  },
+
   -- {
   --   -- Theme inspired by Atom
-  --   'rose-pine/neovim',
+  --   'ellisonleao/gruvbox.nvim',
   --   priority = 1000,
+  --   opts = {
+  --   },
   --   config = function()
-  --     vim.cmd.colorscheme 'rose-pine'
+  --     vim.cmd.colorscheme 'gruvbox'
   --   end,
   -- },
 
-  {
-    -- Theme inspired by Atom
-    'ellisonleao/gruvbox.nvim',
-    priority = 1000,
-    opts = {
-    },
-    config = function()
-      vim.cmd.colorscheme 'gruvbox'
-    end,
-  },
+
+
+  -- {
+  --   -- Theme inspired by Atom
+  --     "craftzdog/solarized-osaka.nvim",
+  --     priority = 1000,
+  --     opts = {
+  --     },
+  --     config = function()
+  --       vim.cmd.colorscheme 'solarized-osaka'
+  --     end,
+  -- },
+
+
 
 
 
@@ -177,7 +188,7 @@ require('lazy').setup({
       options = {
         path = 3,
         icons_enabled = false,
-        theme = 'gruvbox',
+        theme = 'rose-pine',
         component_separators = '|',
         section_separators = '',
       },
@@ -236,37 +247,6 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
 }, {})
 
-
-local null_ls = require("null-ls")
-
-local augroupformat = vim.api.nvim_create_augroup("LspFormatting", {})
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.gofumpt,
-    -- null_ls.builtins.formatting.goimports_reviser,
-    null_ls.builtins.formatting.rustfmt,
-  },
-
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({
-        group = augroupformat,
-        buffer = bufnr,
-      })
-
-      vim.api.nvim_create_autocmd("BufWritePost", {
-        group = augroupformat,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({ async = false, bufnr = bufnr, timeout = 2000 })
-        end,
-      })
-    end
-  end
-
-})
-
 --
 --
 --
@@ -321,7 +301,7 @@ vim.o.updatetime = 50
 -- vim.o.timeout = true
 vim.o.timeoutlen = 300
 
-vim.o.colorcolumn = '80'
+-- vim.o.colorcolumn = '80'
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
