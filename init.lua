@@ -109,7 +109,7 @@ require('lazy').setup({
     opts = {
       formatters_by_ft = {
         go = { "goimports", "gofmt" },
-        rust = {"rustfmt"}
+        rust = { "rustfmt" }
       },
       format_on_save = {
         -- These options will be passed to conform.format()
@@ -120,7 +120,10 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  {
+    'folke/which-key.nvim',
+    opts = {}
+  },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -143,8 +146,10 @@ require('lazy').setup({
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
           { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
+          { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
+        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
+          { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
     },
   },
@@ -154,9 +159,20 @@ require('lazy').setup({
     'rose-pine/neovim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'rose-pine'
+      -- vim.cmd.colorscheme 'rose-pine'
     end,
   },
+
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
+
+  { 'nvim-telescope/telescope-ui-select.nvim' },
 
   -- {
   --   -- Theme inspired by Atom
@@ -169,32 +185,6 @@ require('lazy').setup({
   --   end,
   -- },
 
-
-
-  -- {
-  --   -- Theme inspired by Atom
-  --     "craftzdog/solarized-osaka.nvim",
-  --     priority = 1000,
-  --     opts = {
-  --     },
-  --     config = function()
-  --       vim.cmd.colorscheme 'solarized-osaka'
-  --     end,
-  -- },
-
-
-
-
-
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme 'catppuccin-mocha'
-  --   end,
-  -- },
-  --
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -222,10 +212,10 @@ require('lazy').setup({
   -- },
   --
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
+  { 'numToStr/Comment.nvim',                  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim',          branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -359,6 +349,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    file_ignore_patterns = { 'node_modules', 'target' },
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -368,6 +359,19 @@ require('telescope').setup {
   },
 }
 
+-- This is your opts table
+require("telescope").setup {
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        -- even more opts
+      }
+    }
+  }
+}
+-- To get ui-select loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+pcall(require("telescope").load_extension, "ui-select")
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -385,6 +389,15 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+
+-- vim.keymap.set('n', '<leader>sp', function()
+--   require('telescope.builtin').find_files {
+--     cwd = "~/personal",
+--     find_command = { "ls" },
+--     height = 10,
+--   }
+-- end, { desc = '[S]earch [P]rojects' })
+
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
