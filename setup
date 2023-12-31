@@ -10,18 +10,14 @@ ln -sf "$PWD/tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$PWD/zshrc" "$HOME/.zshrc"
 
 mkdir -p "$HOME/.config/alacritty" 
-mkdir -p "$HOME/.config/nvim" 
 mkdir -p "$HOME/.config/gh" 
 
 if [ ! -d "$HOME/.config/alacritty" ]; then mkdir $HOME/.config/alacritty; fi
 ln -sf "$PWD/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
-
-if [ ! -d "$HOME/.config/nvim" ]; then mkdir $HOME/.config/nvim; fi
-ln -sf "$PWD/init.lua" "$HOME/.config/nvim/init.lua"
 
 ln -sf "$PWD/.git-prompt.sh" "$HOME/.git-prompt.sh"
 
 if [ ! -d "$HOME/.config/gh" ]; then mkdir $HOME/.config/gh; fi
 ln -sf "$PWD/gh/config.yml" "$HOME/.config/gh/config.yml"
 
-ln -s "$PWD/lua" "$HOME/.config/nvim/"
+ln -s "$PWD/nvim" "$HOME/.config"
