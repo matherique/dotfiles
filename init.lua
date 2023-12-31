@@ -103,22 +103,6 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-
-  {
-    'stevearc/conform.nvim',
-    opts = {
-      formatters_by_ft = {
-        go = { "goimports", "gofmt" },
-        rust = { "rustfmt" }
-      },
-      format_on_save = {
-        -- These options will be passed to conform.format()
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
-    },
-  },
-
   -- Useful plugin to show you pending keybinds.
   {
     'folke/which-key.nvim',
@@ -153,6 +137,15 @@ require('lazy').setup({
       end,
     },
   },
+  {
+    's1n7ax/nvim-window-picker',
+    name = 'window-picker',
+    event = 'VeryLazy',
+    version = '2.*',
+    config = function()
+      require 'window-picker'.setup()
+    end,
+  },
 
   {
     -- Theme inspired by Atom
@@ -162,17 +155,46 @@ require('lazy').setup({
       -- vim.cmd.colorscheme 'rose-pine'
     end,
   },
+  {
+    'Mofiqul/vscode.nvim',
+    config = function()
+      local c = require('vscode.colors').get_colors()
+      require('vscode').setup({
+        -- Alternatively set style in setup
+        -- style = 'light'
 
+        -- Enable transparent background
+        transparent = true,
+
+        -- -- Enable italic comment
+        -- italic_comments = true,
+        --
+        -- -- Disable nvim-tree background color
+        -- disable_nvimtree_bg = true,
+        --
+        -- -- Override colors (see ./lua/vscode/colors.lua)
+        -- color_overrides = {
+        --   vscLineNumber = '#FFFFFF',
+        -- },
+        --
+        -- -- Override highlight groups (see ./lua/vscode/theme.lua)
+        -- group_overrides = {
+        --   -- this supports the same val table as vim.api.nvim_set_hl
+        --   -- use colors from this colorscheme by requiring vscode.colors!
+        --   Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
+        -- }
+      })
+      require('vscode').load()
+    end
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
-
-  { 'nvim-telescope/telescope-ui-select.nvim' },
 
   -- {
   --   -- Theme inspired by Atom
@@ -184,51 +206,52 @@ require('lazy').setup({
   --     vim.cmd.colorscheme 'gruvbox'
   --   end,
   -- },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
+  },
 
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
         path = 3,
-        icons_enabled = false,
-        theme = 'rose-pine',
+        icons_enabled = true,
+        theme = 'horizon',
         component_separators = '|',
         section_separators = '',
       },
     },
+    config = function()
+      local custom = require 'lualine.themes.horizon'
+
+      custom.normal.c.bg = '#191919'
+
+      require('lualine').setup {
+        options = { theme = custom },
+      }
+    end
   },
 
-  -- {
-  --   -- Add indentation guides even on blank lines
-  --   'lukas-reineke/indent-blankline.nvim',
-  --   -- Enable `lukas-reineke/indent-blankline.nvim`
-  --   -- See `:help indent_blankline.txt`
-  --   opts = {
-  --     char = '┊',
-  --     show_trailing_blankline_indent = false,
-  --   },
-  -- },
-  --
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',                  opts = {} },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+    }
+  },
 
-  -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim',          branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
   -- requirements installed.
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    -- NOTE: If you are having trouble with this installation,
-    --       refer to the README for telescope-fzf-native for more instructions.
-    build = 'make',
-    cond = function()
-      return vim.fn.executable 'make' == 1
-    end,
-  },
 
   {
     -- Highlight, edit, and navigate code
@@ -242,8 +265,9 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'matherique.plugins.autoformat',
+  require 'matherique.plugins.debug',
+  require 'matherique.plugins.telescope',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -345,70 +369,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    file_ignore_patterns = { 'node_modules', 'target' },
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- This is your opts table
-require("telescope").setup {
-  extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {
-        -- even more opts
-      }
-    }
-  }
-}
--- To get ui-select loaded and working with telescope, you need to call
--- load_extension, somewhere after setup function:
-pcall(require("telescope").load_extension, "ui-select")
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
-
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer' })
-
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-
--- vim.keymap.set('n', '<leader>sp', function()
---   require('telescope.builtin').find_files {
---     cwd = "~/personal",
---     find_command = { "ls" },
---     height = 10,
---   }
--- end, { desc = '[S]earch [P]rojects' })
-
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = "all",
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -470,6 +436,11 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+require("ibl").setup({
+  indent = { char = '┊' },
+  -- show_trailing_blankline_indent = false,
+})
+--
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
@@ -531,8 +502,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   end,
 })
 
-
-
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -589,8 +558,8 @@ local servers = {
     },
   },
   -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  rust_analyzer = {},
+  tsserver = {},
 
   lua_ls = {
     Lua = {
@@ -636,6 +605,10 @@ cmp.setup {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),

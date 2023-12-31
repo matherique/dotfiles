@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-
-nvim ~/personal/dotfiles
-wait 
-
-git add .
-git commit -m 'update dotfiles'
-git push 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ln -sf "$PWD/vimrc" "$HOME/.vimrc"
+# ln -sf "$PWD/vimrc" "$HOME/.vimrc"
 ln -sf "$PWD/gitconfig" "$HOME/.gitconfig"
 ln -sf "$PWD/.personal/gitconfig-personal" "$HOME/personal/.gitconfig"
 ln -sf "$PWD/bashrc" "$HOME/.bashrc"
@@ -24,8 +24,4 @@ ln -sf "$PWD/.git-prompt.sh" "$HOME/.git-prompt.sh"
 if [ ! -d "$HOME/.config/gh" ]; then mkdir $HOME/.config/gh; fi
 ln -sf "$PWD/gh/config.yml" "$HOME/.config/gh/config.yml"
 
-curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -s "$PWD/lua" "$HOME/.config/nvim/"

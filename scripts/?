@@ -1,4 +1,0 @@
-#!/usr/bin/bash
-
-google-chrome --new-window google.com/search?q=$(echo $@ | sed 's/ /%20/g')
-

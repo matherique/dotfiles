@@ -1,7 +1,0 @@
-require("matherique.plugin-step")
-require("matherique.core.options")
-require("matherique.core.keymaps")
-require("matherique.core.colorscheme")
-require("matherique.plugins.telescope")
-require("matherique.plugins.treesitter")
-require("matherique.plugins.lsp")
