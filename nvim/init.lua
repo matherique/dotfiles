@@ -196,25 +196,6 @@ require('lazy').setup({
     end,
   },
 
-  -- {
-  --   -- Theme inspired by Atom
-  --   'ellisonleao/gruvbox.nvim',
-  --   priority = 1000,
-  --   opts = {
-  --   },
-  --   config = function()
-  --     vim.cmd.colorscheme 'gruvbox'
-  --   end,
-  -- },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
-  },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
