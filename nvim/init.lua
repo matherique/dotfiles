@@ -164,7 +164,7 @@ require('lazy').setup({
         -- style = 'light'
 
         -- Enable transparent background
-        transparent = true,
+        -- transparent = true,
 
         -- -- Enable italic comment
         -- italic_comments = true,
@@ -184,7 +184,7 @@ require('lazy').setup({
         --   Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
         -- }
       })
-      require('vscode').load()
+      -- require('vscode').load()
     end
   },
   {
@@ -193,6 +193,14 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'catppuccin-mocha'
+    end,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    name = "nightfox",
+    priority = 1000,
+    config = function()
+      -- vim.cmd.colorscheme 'nightfox'
     end,
   },
 
@@ -212,7 +220,7 @@ require('lazy').setup({
     config = function()
       local custom = require 'lualine.themes.horizon'
 
-      custom.normal.c.bg = '#191919'
+      -- custom.normal.c.bg = '#191919'
 
       require('lualine').setup {
         options = { theme = custom },
@@ -249,6 +257,7 @@ require('lazy').setup({
   require 'matherique.plugins.autoformat',
   require 'matherique.plugins.debug',
   require 'matherique.plugins.telescope',
+  -- require 'matherique.plugins.harpoon',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -321,10 +330,13 @@ vim.o.termguicolors = true
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none", fg = "none" })
--- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none" })
--- vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none" })
+
+vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none" })
+
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = "none" })
+
 vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none", fg = "none" })
@@ -378,7 +390,6 @@ require('nvim-treesitter.configs').setup {
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
         ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
         ['ac'] = '@class.outer',
@@ -408,7 +419,6 @@ require('nvim-treesitter.configs').setup {
     swap = {
       enable = true,
       swap_next = {
-        ['<leader>a'] = '@parameter.inner',
       },
       swap_previous = {
         ['<leader>A'] = '@parameter.inner',
@@ -419,6 +429,10 @@ require('nvim-treesitter.configs').setup {
 
 require("ibl").setup({
   indent = { char = '┊' },
+  scope = {
+    show_start = false,
+    show_end = false
+  }
   -- show_trailing_blankline_indent = false,
 })
 --
@@ -592,8 +606,6 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
