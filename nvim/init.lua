@@ -257,7 +257,7 @@ require('lazy').setup({
   require 'matherique.plugins.autoformat',
   require 'matherique.plugins.debug',
   require 'matherique.plugins.telescope',
-  -- require 'matherique.plugins.harpoon',
+  require 'matherique.plugins.harpoon',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
