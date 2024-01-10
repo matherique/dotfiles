@@ -504,6 +504,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
+  html = {},
   gopls = {
     cmd = { "gopls", "serve" },
     filetypes = { "go", "gomod" },
