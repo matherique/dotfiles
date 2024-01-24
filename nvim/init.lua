@@ -103,40 +103,12 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-  -- Useful plugin to show you pending keybinds.
-  {
-    'folke/which-key.nvim',
-    opts = {}
-  },
+  -- -- Useful plugin to show you pending keybinds.
   -- {
-  --   -- Adds git releated signs to the gutter, as well as utilities for managing changes
-  --   'lewis6991/gitsigns.nvim',
-  --   opts = {
-  --     -- See `:help gitsigns.txt`
-  --     signs = {
-  --       add = { text = '+' },
-  --       change = { text = '~' },
-  --       delete = { text = '_' },
-  --       topdelete = { text = '‾' },
-  --       changedelete = { text = '~' },
-  --     },
-  --     current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  --     current_line_blame_opts = {
-  --       virt_text = true,
-  --       virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-  --       delay = 1000,
-  --       ignore_whitespace = false,
-  --     },
-  --     on_attach = function(bufnr)
-  --       vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
-  --         { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-  --       vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
-  --         { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-  --       vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
-  --         { buffer = bufnr, desc = '[P]review [H]unk' })
-  --     end,
-  --   },
+  --   'folke/which-key.nvim',
+  --   opts = {}
   -- },
+  -- {
   {
     's1n7ax/nvim-window-picker',
     name = 'window-picker',
@@ -147,86 +119,86 @@ require('lazy').setup({
     end,
   },
 
-  {
-    -- Theme inspired by Atom
-    'rose-pine/neovim',
-    priority = 1000,
-    config = function()
-      -- vim.cmd.colorscheme 'rose-pine'
-    end,
-  },
-  {
-    'Mofiqul/vscode.nvim',
-    config = function()
-      local c = require('vscode.colors').get_colors()
-      require('vscode').setup({
-        -- Alternatively set style in setup
-        -- style = 'light'
+  -- {
+  --   -- Theme inspired by Atom
+  --   'rose-pine/neovim',
+  --   priority = 1000,
+  --   config = function()
+  --     -- vim.cmd.colorscheme 'rose-pine'
+  --   end,
+  -- },
+  -- {
+  --   'Mofiqul/vscode.nvim',
+  --   config = function()
+  --     local c = require('vscode.colors').get_colors()
+  --     require('vscode').setup({
+  --       -- Alternatively set style in setup
+  --       -- style = 'light'
+  --
+  --       -- Enable transparent background
+  --       -- transparent = true,
+  --
+  --       -- -- Enable italic comment
+  --       -- italic_comments = true,
+  --       --
+  --       -- -- Disable nvim-tree background color
+  --       -- disable_nvimtree_bg = true,
+  --       --
+  --       -- -- Override colors (see ./lua/vscode/colors.lua)
+  --       -- color_overrides = {
+  --       --   vscLineNumber = '#FFFFFF',
+  --       -- },
+  --       --
+  --       -- -- Override highlight groups (see ./lua/vscode/theme.lua)
+  --       -- group_overrides = {
+  --       --   -- this supports the same val table as vim.api.nvim_set_hl
+  --       --   -- use colors from this colorscheme by requiring vscode.colors!
+  --       --   Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
+  --       -- }
+  --     })
+  --     -- require('vscode').load()
+  --   end
+  -- },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   config = function()
+  --     -- vim.cmd.colorscheme 'catppuccin-mocha'
+  --   end,
+  -- },
+  -- {
+  --   "EdenEast/nightfox.nvim",
+  --   name = "nightfox",
+  --   priority = 1000,
+  --   config = function()
+  --     -- vim.cmd.colorscheme 'nightfox'
+  --   end,
+  -- },
 
-        -- Enable transparent background
-        -- transparent = true,
-
-        -- -- Enable italic comment
-        -- italic_comments = true,
-        --
-        -- -- Disable nvim-tree background color
-        -- disable_nvimtree_bg = true,
-        --
-        -- -- Override colors (see ./lua/vscode/colors.lua)
-        -- color_overrides = {
-        --   vscLineNumber = '#FFFFFF',
-        -- },
-        --
-        -- -- Override highlight groups (see ./lua/vscode/theme.lua)
-        -- group_overrides = {
-        --   -- this supports the same val table as vim.api.nvim_set_hl
-        --   -- use colors from this colorscheme by requiring vscode.colors!
-        --   Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
-        -- }
-      })
-      -- require('vscode').load()
-    end
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      -- vim.cmd.colorscheme 'catppuccin-mocha'
-    end,
-  },
-  {
-    "EdenEast/nightfox.nvim",
-    name = "nightfox",
-    priority = 1000,
-    config = function()
-      -- vim.cmd.colorscheme 'nightfox'
-    end,
-  },
-
-  {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {
-      options = {
-        path = 3,
-        icons_enabled = true,
-        theme = 'horizon',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-    config = function()
-      local custom = require 'lualine.themes.horizon'
-
-      -- custom.normal.c.bg = '#191919'
-
-      require('lualine').setup {
-        options = { theme = custom },
-      }
-    end
-  },
+  -- {
+  --   -- Set lualine as statusline
+  --   'nvim-lualine/lualine.nvim',
+  --   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  --   opts = {
+  --     options = {
+  --       path = 3,
+  --       icons_enabled = true,
+  --       theme = 'gruvbox_dark',
+  --       component_separators = '|',
+  --       section_separators = '',
+  --     },
+  --   },
+  --   config = function()
+  --     local custom = require 'lualine.themes.iceberg_dark'
+  --
+  --     custom.normal.c.bg = '#191919'
+  --
+  --     require('lualine').setup({
+  --       options = { theme = custom },
+  --     })
+  --   end
+  -- },
 
   -- {
   --   "lukas-reineke/indent-blankline.nvim",
@@ -276,6 +248,9 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = false
 
+vim.diagnostic.config({
+  signs = false,
+})
 
 vim.colorscheme = "peachpuff"
 
@@ -343,6 +318,14 @@ vim.o.completeopt = 'menuone,noselect'
 -- vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "none" })
 -- vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "none" })
 -- vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none", fg = "none" })
+
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#3B4252", fg = "#5E81AC" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#3B4252" })
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "#3B4252" })
+vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "#3B4252" })
+vim.api.nvim_set_hl(0, "StatusLine", { bg = "#3B4252" })
+vim.api.nvim_set_hl(0, "ErrorMsg", { bg = "#3B4252" })
+
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
