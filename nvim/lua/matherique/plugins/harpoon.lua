@@ -9,9 +9,6 @@ return {
     vim.keymap.set("n", "<leader>a", mark.add_file)
     vim.keymap.set("n", "<leader><space>", ui.toggle_quick_menu)
 
-    vim.keymap.set("n", "<C-1>", function() ui.nav_file(1) end)
-    vim.keymap.set("n", "<C-2>", function() ui.nav_prev(2) end)
-    vim.keymap.set("n", "<C-3>", function() ui.nav_prev(3) end)
-    vim.keymap.set("n", "<C-4>", function() ui.nav_prev(4) end)
+    vim.keymap.set("n", "<C-p>", function() ui.nav_prev() end)
   end
 }
