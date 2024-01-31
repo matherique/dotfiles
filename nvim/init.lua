@@ -123,6 +123,15 @@ require('lazy').setup({
   -- requirements installed.
 
   {
+    -- Theme inspired by Atom
+    'rose-pine/neovim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'rose-pine'
+    end,
+  },
+
+  {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -160,7 +169,7 @@ vim.diagnostic.config({
   signs = false,
 })
 
-vim.colorscheme = "peachpuff"
+-- vim.colorscheme = "peachpuff"
 
 -- Make line numbers default
 vim.wo.number = true
@@ -212,16 +221,16 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
--- vim.o.termguicolors = false
+vim.o.termguicolors = true
 
--- vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = "none" })
--- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none", fg = "none" })
--- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none" })
---
--- vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none" })
---
--- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", fg = "none" })
--- vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none" })
+
+vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none" })
+
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = "none" })
 --
 -- vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "none" })
 -- vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "none" })
@@ -230,11 +239,11 @@ vim.o.completeopt = 'menuone,noselect'
 -- some change in themes
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#3B4252", fg = "#5E81AC" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#3B4252" })
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "#3B4252" })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "#3B4252" })
-vim.api.nvim_set_hl(0, "StatusLine", { bg = "#3B4252" })
-vim.api.nvim_set_hl(0, "ErrorMsg", { bg = "#3B4252" })
-vim.api.nvim_set_hl(0, "Comment", { bg = "#6C6C6C", ctermfg = 242, italic = true })
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "ErrorMsg", { bg = "#3B4252" })
+-- vim.api.nvim_set_hl(0, "Comment", { bg = "#6C6C6C", ctermfg = 242, italic = true })
 
 
 -- Keymaps for better default experience
