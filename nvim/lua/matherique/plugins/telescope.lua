@@ -1,6 +1,4 @@
 return {
-  -- Code Action ui
-  'nvim-telescope/telescope-ui-select.nvim',
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     -- NOTE: If you are having trouble with this installation,
@@ -36,7 +34,6 @@ return {
         }
       }
 
-      pcall(require("telescope").load_extension, "ui-select")
       pcall(require('telescope').load_extension, 'fzf')
 
       -- See `:help telescope.builtin`
