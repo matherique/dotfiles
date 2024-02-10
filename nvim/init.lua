@@ -241,6 +241,7 @@ vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none" })
 vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "ErrorMsg", { bg = "#3B4252" })
 -- vim.api.nvim_set_hl(0, "Comment", { bg = "#6C6C6C", ctermfg = 242, italic = true })
@@ -533,6 +534,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
+
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

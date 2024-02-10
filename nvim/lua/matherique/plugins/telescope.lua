@@ -11,11 +11,16 @@ return {
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('telescope').setup {
+      require('telescope').setup({
         defaults = {
+          layout_strategy = 'bottom_pane',
+          layout_config = {
+            height = 0.5,
+            preview_cutoff = 100,
+            prompt_position = "bottom"
+          },
           file_ignore_patterns = { 'node_modules', 'target' },
           mappings = {
             i = {
@@ -32,7 +37,7 @@ return {
             }
           }
         }
-      }
+      })
 
       pcall(require('telescope').load_extension, 'fzf')
 
