@@ -127,7 +127,22 @@ require('lazy').setup({
     'rose-pine/neovim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'rose-pine'
+      -- vim.cmd.colorscheme 'rose-pine'
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    priority = 1000,
+    config = function()
+      -- vim.cmd.colorscheme 'kanagawa'
+    end
+  },
+  {
+    'projekt0n/github-nvim-theme',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'github_dark'
     end,
   },
 
@@ -231,6 +246,7 @@ vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "none" })
 
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "LineNr", { bg = "none", fg = "#6c6c6c" })
 --
 -- vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "none" })
 -- vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "none" })
