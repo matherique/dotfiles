@@ -150,12 +150,22 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-
+  {
+    'stevearc/conform.nvim',
+    opts = {
+      notify_on_error = false,
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_fallback = true,
+      },
+    },
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'matherique.plugins.autoformat',
-  require 'matherique.plugins.debug',
+  -- require 'matherique.plugins.autoformat',
+  -- require 'matherique.plugins.debug',
   require 'matherique.plugins.telescope',
   require 'matherique.plugins.harpoon',
   require 'matherique.plugins.git',
