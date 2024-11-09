@@ -1,5 +1,5 @@
 [core]
-  editor=vim
+  editor=nvim
 
 [includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig
@@ -11,7 +11,7 @@
   parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
   st = status -sb
   sf = show --name-only
-  lg = log --oneline --graph --decorate 
+  lg = log --oneline --graph --decorate --pretty=format:'%C(yellow)%h%Creset %C(cyan)%ad%Creset | %s %C(green)%d%Creset [%C(bold blue)%an%Creset]' --date=format:'%Y-%m-%d %H:%M:%S' --color
   incoming = !(git fetch --quiet && git log --pretty=format:'%C(yellow)%h %C(white)- %C(red)%an %C(white)- %C(cyan)%d%Creset %s %C(white)- %ar%Creset' ..@{u})
   outgoing = !(git fetch --quiet && git log --pretty=format:'%C(yellow)%h %C(white)- %C(red)%an %C(white)- %C(cyan)%d%Creset %s %C(white)- %ar%Creset' @{u}..)
   unstage = reset HEAD --
@@ -19,13 +19,13 @@
   rollback = reset --soft HEAD~1
 
 [pull]
-	rebase = false
+  rebase = false
 
 [init]
-	defaultBranch = main
-
-[commit]
-  gpgsign = true
+  defaultBranch = main
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
+[push]
+	autoSetupRemote = true

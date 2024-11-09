@@ -1,0 +1,16 @@
+[env]
+TERM = "xterm-256color"   
+
+[font]
+normal.family = "JetBrainsMonoNL Nerd Font"
+size = 22
+
+[window]
+opacity = 0.97
+blur = true
+
+
+[scrolling]
+history = 10000      # Número de linhas no histórico de scroll
+multiplier = 3       # Multiplicador para a velocidade de scrolling
+

@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="jispwoso"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -101,6 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+
+
+export PATH="$HOME/personal/dotfiles/scripts:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -118,5 +122,30 @@ source ~/.bash_profile
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-. "$HOME/.asdf/asdf.sh"
 
+export M2_HOME="/Users/matherique/work/sencon/apache-maven-3.9.6"
+PATH="${M2_HOME}/bin:${PATH}"
+export PATH
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="/opt/homebrew/opt/php@7.3/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@7.3/sbin:$PATH"
+export PATH=$PATH:$HOME/.composer/vendor/bin
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/matherique/work/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/matherique/work/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/matherique/work/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/matherique/work/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
+
+source <(kubectl completion zsh)
+alias k='kubectl'
+alias vim='nvim'
+
+export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"

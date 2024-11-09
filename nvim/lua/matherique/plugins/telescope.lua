@@ -14,14 +14,9 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('telescope').setup({
+        winblend = 20, -- Ajuste este valor para controlar a transparência
         defaults = {
-          layout_strategy = 'bottom_pane',
-          layout_config = {
-            height = 0.5,
-            preview_cutoff = 100,
-            prompt_position = "bottom"
-          },
-          file_ignore_patterns = { 'node_modules', 'target' },
+          file_ignore_patterns = { 'node_modules', 'target', 'vendor' },
           mappings = {
             i = {
               ['<C-u>'] = false,

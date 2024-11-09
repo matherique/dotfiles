@@ -8,12 +8,13 @@ ln -sf "$PWD/bash_profile" "$HOME/.bash_profile"
 ln -sf "$PWD/profile" "$HOME/.profile"
 ln -sf "$PWD/tmux.conf" "$HOME/.tmux.conf"
 ln -sf "$PWD/zshrc" "$HOME/.zshrc"
+ln -sf "$PWD/wezterm.lua" "$HOME/.wezterm.lua"
 
 mkdir -p "$HOME/.config/alacritty" 
 mkdir -p "$HOME/.config/gh" 
 
 if [ ! -d "$HOME/.config/alacritty" ]; then mkdir $HOME/.config/alacritty; fi
-ln -sf "$PWD/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+ln -sf "$PWD/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
 
 ln -sf "$PWD/.git-prompt.sh" "$HOME/.git-prompt.sh"
 
