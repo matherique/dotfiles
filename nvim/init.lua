@@ -27,7 +27,7 @@ require('lazy').setup({
     -- Git related plugins
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
-    'github/copilot.vim',
+    --:w'github/copilot.vim',
     -- Detect tabstop and shiftwidth automatically
     'tpope/vim-sleuth',
     -- NOTE: This is where your plugins related to LSP can be installed.
@@ -91,6 +91,14 @@ require('lazy').setup({
         end,
     },
     {
+        -- Theme inspired by Atom
+        'ellisonleao/gruvbox.nvim',
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme 'gruvbox'
+        end,
+    },
+    {
         "rebelot/kanagawa.nvim",
         priority = 1000,
         config = function()
@@ -103,6 +111,14 @@ require('lazy').setup({
         priority = 1000,
         config = function()
             -- vim.cmd.colorscheme 'github_dark'
+        end,
+    },
+    {
+        'maxmx03/solarized.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            -- vim.cmd.colorscheme 'solarized'
         end,
     },
     {
@@ -207,11 +223,18 @@ require('lazy').setup({
         'stevearc/conform.nvim',
         opts = {
             notify_on_error = false,
-            format_on_save = {
-                -- These options will be passed to conform.format()
-                timeout_ms = 500,
-                lsp_fallback = true,
-            },
+            -- format_on_save = {
+            --     -- These options will be passed to conform.format()
+            --     timeout_ms = 500,
+            --     lsp_fallback = true,
+            -- },
+            format_on_save = function(bufnr)
+                -- exclude PHP files
+                if vim.bo[bufnr].filetype == "php" then
+                    return false
+                end
+                return { timeout_ms = 500, lsp_fallback = true }
+            end,
         },
     },
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -244,7 +267,7 @@ vim.diagnostic.config({
     signs = false,
 })
 
-vim.colorscheme = "peachpuff"
+-- vim.colorscheme = "peachpuff"
 
 -- Make line numbers default
 vim.wo.number = true
@@ -282,6 +305,7 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 -- vim.wo.signcolumn = 'yes'
 vim.o.swapfile = false
+vim.o.colorcolumn = "80"
 
 -- Decrease update time
 vim.o.updatetime = 50
@@ -531,7 +555,7 @@ local servers = {
     },
     pyright = {},
     rust_analyzer = {},
-    tsserver = {},
+    -- tsserver = {},
 
     lua_ls = {
         Lua = {

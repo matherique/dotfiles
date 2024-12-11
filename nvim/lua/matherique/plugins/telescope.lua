@@ -23,6 +23,7 @@ return {
               ['<C-d>'] = false,
             },
           },
+          theme = "ivy"
         },
         -- This is your opts table
         extensions = {
@@ -31,6 +32,11 @@ return {
               -- even more opts
             }
           }
+        },
+        pickers = {
+          find_files = { theme = "ivy" },
+          live_grep = { theme = "ivy" },
+          grep_string = { theme = "ivy" }
         }
       })
 
@@ -40,7 +46,7 @@ return {
       -- vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy {
           winblend = 10,
           previewer = false,
         })
